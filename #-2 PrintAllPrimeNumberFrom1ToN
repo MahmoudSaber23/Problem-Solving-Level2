@@ -1,1 +1,48 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+enum enPrimeNotPrime { Prime = 1, NotPrime };
+int ReadPositiveNumber(string Message)
+{
+    int Number = 0;
+    do {
+        cout << Message << endl;
+        cin >> Number;
+
+    } while (Number <= 0);
+
+    return Number;
+}
+enPrimeNotPrime CheckType(int Number)
+{
+    for (int i = 2; i <= sqrt(Number); i++)
+    {
+        if (Number % i == 0)
+        
+            return enPrimeNotPrime::NotPrime;
+        
+    }
+    return enPrimeNotPrime::Prime;
+}
+void PrintResult(int Number)
+{
+    cout << "\n";
+    cout << "Prime Numbers " << 1 << " To " << Number <<
+        " Are: " << endl;
+    for (int i = 1; i <= Number; i++)
+    {
+        if (CheckType(i) == enPrimeNotPrime::Prime)
+        {
+            cout << i << endl;
+        }
+    }
+}
+int main()
+{
+    PrintResult(ReadPositiveNumber("Please Enter a Positive Number? "));
+  
+    return 0;
+}
 
