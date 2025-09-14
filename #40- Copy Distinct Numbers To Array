@@ -1,1 +1,63 @@
+#include <iostream>
+using namespace std;
+
+void fillArray(int arr[100], int& arrLength) {
+    cout << "Enter number of elements: ";
+    cin >> arrLength;
+
+    cout << "Enter array elements:\n";
+    for (int i = 0; i < arrLength; i++) {
+        cin >> arr[i];
+    }
+}
+
+void printArray(int arr[100], int arrLength) {
+    for (int i = 0; i < arrLength; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+short findNumberPositionInArray(int number, int arr[100], int arrLength) {
+    for (int i = 0; i < arrLength; i++) {
+        if (number == arr[i])
+            return i;
+    }
+    return -1;
+}
+
+bool isNumberInArray(int number, int arr[100], int arrLength) {
+    return findNumberPositionInArray(number, arr, arrLength) != -1;
+}
+
+void addArrayElement(int number, int arr[100], int& arrLength) {
+    arrLength++;
+    arr[arrLength - 1] = number;
+}
+
+void copyDistinctNumbersToArray(int arr[100], int arrDestination[100], int arrLength, int& arrLengthDestination) {
+    for (int i = 0; i < arrLength; i++) {
+        if (!isNumberInArray(arr[i], arrDestination, arrLengthDestination)) {
+            addArrayElement(arr[i], arrDestination, arrLengthDestination);
+        }
+    }
+}
+
+int main() {
+    int arr[100], arrLength = 0, arrDestination[100], arrLengthDestination = 0;
+
+    fillArray(arr, arrLength);
+
+    cout << "\nArray Elements: " << endl;
+    printArray(arr, arrLength);
+
+    copyDistinctNumbersToArray(arr, arrDestination, arrLength, arrLengthDestination);
+
+    cout << "\nDistinct Array Elements: " << endl;
+    printArray(arrDestination, arrLengthDestination);
+
+    cout << "Distinct count = " << arrLengthDestination << endl;
+
+    return 0;
+}
 
